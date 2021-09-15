@@ -35,5 +35,37 @@ $AlphatecFrontend-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+//vars
+
+$spacingUnit: 10px;
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.tab-50{
+  width: 50%;
+}
+
+.w-100{
+  width: calc(100% - #{$spacingUnit * 2}) ;
+}
+
+.px-1{
+  padding-left: $spacingUnit;
+  padding-right: $spacingUnit;
+}
+
+.mt-1{
+  margin-top: $spacingUnit;
+}
+
+.mr-1{
+  margin-right: $spacingUnit;
+}
+
+.ta-r{
+  text-align: right;
+}
+

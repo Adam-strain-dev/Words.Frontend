@@ -10,10 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { StringListComponent } from './components/string-list/string-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StringListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

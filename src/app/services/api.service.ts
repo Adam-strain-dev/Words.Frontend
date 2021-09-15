@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { AnagramInstanceSearch } from '../models/anagram-instance-search';
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +15,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   SolveAnagrams = (searchString: string): Observable<string[]> => this.http.get<string[]>(`${this._apiUrl}/getAnagrams/${searchString}`);
+
+  GetInstancesOfAnagrams = (anagramInstanceSearch: AnagramInstanceSearch) => this.http.get<number>(`${this._apiUrl}/getAnagramSubstringCount/${anagramInstanceSearch.searchTerm}/${anagramInstanceSearch.stringToSearch}`);
 }

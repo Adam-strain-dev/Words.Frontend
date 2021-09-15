@@ -1,8 +1,34 @@
 <div class="container">
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="value" (ngModelChange)="getAnagrams(value)">
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+  <mat-tab-group mat-stretch-tabs color="Accent" backgroundColor="primary">
+    <mat-tab label="Get Anagrams">
+      <h4 class="px-1">Enter your search term and results will be displayed below</h4>
+      <mat-form-field class="w-100 px-1 mt-1">
+        <mat-label>Search Term</mat-label>
+        <input matInput type="text" [(ngModel)]="anagramSearchTerm" (ngModelChange)="getAnagrams(anagramSearchTerm)">
+        <button *ngIf="anagramSearchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="anagramSearchTerm=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <app-string-list [stringList]="anagramSearchResults$ | async"></app-string-list>
+    </mat-tab>
+    <mat-tab label="Get Anagram Instances">
+      <mat-form-field class="w-100 px-1 mt-1">
+        <mat-label>Search Term</mat-label>
+        <input matInput type="text" [(ngModel)]="anagramInstanceSearch.searchTerm" (ngModelChange)="searchAnagrams(anagramInstanceSearch)">
+        <button *ngIf="anagramInstanceSearch.searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="anagramInstanceSearch.searchTerm=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="w-100 px-1">
+        <mat-label>String to be Searched</mat-label>
+        <input matInput type="text" [(ngModel)]="anagramInstanceSearch.stringToSearch" (ngModelChange)="searchAnagrams(anagramInstanceSearch)">
+        <button *ngIf="anagramInstanceSearch.stringToSearch" matSuffix mat-icon-button aria-label="Clear" (click)="anagramInstanceSearch.stringToSearch=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <!-- <div class="button-holder ta-r mr-1">
+        <button mat-raised-button color="primary">Go</button>
+      </div> -->
+    </mat-tab>
+  </mat-tab-group>
 </div>

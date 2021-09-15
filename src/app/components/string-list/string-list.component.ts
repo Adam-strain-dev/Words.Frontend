@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StringListComponent implements OnInit {
 
   @Input() stringList: string[] | null = [];
-
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { AnagramInstanceSearch } from './models/anagram-instance-search';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import * as _ from 'underscore';
 
@@ -14,7 +14,7 @@ import * as _ from 'underscore';
 })
 export class AppComponent {
   
-  anagramSearchResults$: Observable<string[]> = new Observable<string[]>();
+  anagramSearchResults$: Observable<string[]> | null = new Observable<string[]>();
   anagramNumberInstanceResult$: Observable<number> = new Observable<number>();
 
   constructor(private api: ApiService){
@@ -29,25 +29,26 @@ export class AppComponent {
   };
 
   getAnagrams = (searchString:string) => {
+    if(searchString.trim() == ""){
+      this.anagramSearchResults$ = of([]);
+    }
     this.anagramSearchResults$ = this.api.SolveAnagrams(searchString);
-    this.anagramSearchResults$.subscribe((data) => {
-      console.log(data);
-    })
-    // console.log(this.anagramSearchResults$);
-    // .subscribe((anagramList: string[]) => {
-    //    = anagramList;
-    //   console.log(anagramList);
-    //   console.log("I'm done");
-    // })
   }
 
   searchAnagrams = (anagramSearch: AnagramInstanceSearch) => {
     if(this.anagramInstanceSearch.searchTerm.trim() == "" || this.anagramInstanceSearch.stringToSearch.trim() == ""){
-      return;
     }
     this.anagramNumberInstanceResult$ = this.api.GetInstancesOfAnagrams(anagramSearch);
-    this.anagramNumberInstanceResult$.subscribe((data) => {
-      console.log(data);
-    })    
+    // this.anagramNumberInstanceResult$.subscribe((data) => {
+      
+    // })    
+  }
+
+  clearSearchModel = () => {
+    this.anagramSearchResults$ = of();
+  }
+
+  clearInstanceModel = () => {
+    this.anagramNumberInstanceResult$ = of();
   }
 }

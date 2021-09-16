@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ApiService } from './services/api.service';
-import { AnagramInstanceSearch } from './models/anagram-instance-search';
-
-import { Observable, of } from 'rxjs';
+import { AnagramInstanceSearchTerms } from './models/anagram-instance-search';
 
 import * as _ from 'underscore';
 
@@ -14,41 +12,30 @@ import * as _ from 'underscore';
 })
 export class AppComponent {
   
-  anagramSearchResults$: Observable<string[]> | null = new Observable<string[]>();
-  anagramNumberInstanceResult$: Observable<number> = new Observable<number>();
+  searchResults: string[] = [];
+  anagramNumberInstanceResult: number = 0;
 
   constructor(private api: ApiService){
-    this.getAnagrams = _.debounce(this.getAnagrams, 0);
-    this.searchAnagrams = _.debounce(this.searchAnagrams, 0);
+    this.getAnagrams = _.debounce(this.getAnagrams, 100);
+    this.searchAnagrams = _.debounce(this.searchAnagrams, 100);
   }
-  
-  anagramSearchTerm: string = '';
-  anagramInstanceSearch: AnagramInstanceSearch = {
-    searchTerm: '',
-    stringToSearch: ''
-  };
 
   getAnagrams = (searchString:string) => {
     if(searchString.trim() == ""){
-      this.anagramSearchResults$ = of([]);
+      this.searchResults = [];
+      return;
     }
-    this.anagramSearchResults$ = this.api.SolveAnagrams(searchString);
+    this.api.SolveAnagrams(searchString).subscribe((data: string[]) => {
+      this.searchResults = data;
+    })
   }
 
-  searchAnagrams = (anagramSearch: AnagramInstanceSearch) => {
-    if(this.anagramInstanceSearch.searchTerm.trim() == "" || this.anagramInstanceSearch.stringToSearch.trim() == ""){
+  searchAnagrams = (anagramSearch: AnagramInstanceSearchTerms) => {
+    if(anagramSearch.searchTerm.trim() == "" || anagramSearch.stringToSearch.trim() == ""){
+      return;
     }
-    this.anagramNumberInstanceResult$ = this.api.GetInstancesOfAnagrams(anagramSearch);
-    // this.anagramNumberInstanceResult$.subscribe((data) => {
-      
-    // })    
-  }
-
-  clearSearchModel = () => {
-    this.anagramSearchResults$ = of();
-  }
-
-  clearInstanceModel = () => {
-    this.anagramNumberInstanceResult$ = of();
+     this.api.GetInstancesOfAnagrams(anagramSearch).subscribe((data: number) => {
+      this.anagramNumberInstanceResult = data ?? 0;
+     })
   }
 }

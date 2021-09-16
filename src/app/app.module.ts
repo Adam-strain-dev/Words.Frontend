@@ -12,11 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { StringListComponent } from './components/string-list/string-list.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
+import { SearchInstanceFormComponent } from './components/search-instance-form/search-instance-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StringListComponent
+    StringListComponent,
+    SearchFormComponent,
+    SearchInstanceFormComponent
   ],
   imports: [
     BrowserModule,

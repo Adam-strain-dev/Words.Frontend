@@ -1,0 +1,9 @@
+<h4 class="px-1 mt-2 ta-c">Enter your search term and results will be displayed below</h4>
+<mat-form-field class="w-100 px-1 mt-1">
+    <mat-label>Search Term</mat-label>
+    <input matInput type="text" [(ngModel)]="anagramSearchTerm" (ngModelChange)="getAnagrams()">
+    <button *ngIf="anagramSearchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="resetSearchForm()" tabindex="-1">
+    <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<app-string-list [stringList]="anagramSearchResults"></app-string-list>

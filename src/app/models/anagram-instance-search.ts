@@ -1,4 +1,4 @@
-export interface AnagramInstanceSearch {
+export interface AnagramInstanceSearchTerms {
     searchTerm: string;
     stringToSearch: string;
 }

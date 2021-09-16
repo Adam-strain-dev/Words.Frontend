@@ -1,0 +1,16 @@
+<h4 class="px-1 mt-2 ta-c">Enter your search term and the string that you would like to check and the results will be displayed below</h4>
+<mat-form-field class="w-100 px-1 mt-1">
+    <mat-label>Search Term</mat-label>
+    <input matInput type="text" [(ngModel)]="anagramInstanceSearchTerms.searchTerm" (ngModelChange)="searchForAnagramInstances()">
+    <button *ngIf="anagramInstanceSearchTerms.searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="anagramInstanceSearchTerms.searchTerm=''; clearInstanceModelSearchTerm()" tabindex="-1">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<mat-form-field class="w-100 px-1 mt-1">
+    <mat-label>String to be Searched</mat-label>
+    <input matInput type="text" [(ngModel)]="anagramInstanceSearchTerms.stringToSearch" (ngModelChange)="searchForAnagramInstances()">
+    <button *ngIf="anagramInstanceSearchTerms.stringToSearch" matSuffix mat-icon-button aria-label="Clear" (click)="anagramInstanceSearchTerms.stringToSearch=''; clearInstanceModelSearchString()" tabindex="-1">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<div class="results-text px-1 ta-c mt-1" *ngIf="anagramNumberInstanceResult && anagramInstanceSearchTerms.stringToSearch && anagramInstanceSearchTerms.searchTerm">I found <span class="fw-bold">{{ (anagramNumberInstanceResult) ?? 0 }}</span> instances of an anagram of <span class="fw-bold">{{anagramInstanceSearchTerms.searchTerm}}</span> in <span class="fw-bold">{{anagramInstanceSearchTerms.stringToSearch}}</span> </div>

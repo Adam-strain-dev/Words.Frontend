@@ -47,6 +47,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+//dimensions
+
 .tab-50{
   width: 50%;
 }
@@ -54,6 +56,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .w-100{
   width: calc(100% - #{$spacingUnit * 2}) ;
 }
+
+//spacing
 
 .px-1{
   padding-left: $spacingUnit;
@@ -72,6 +76,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-right: $spacingUnit;
 }
 
+//alignment
+
 .ta-c{
   text-align: center;
 }
@@ -80,18 +86,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: right;
 }
 
+//text
+
 .fs-italic{
   font-style: italic;
 }
 
 .fw-bold{
   font-weight: bold;
-}
-
-.col-primary{
-  // color: mat-color($accent) !important;
-}
-
-.mat-tab-label-active{
-  border-bottom: 2px solid white;
 }
